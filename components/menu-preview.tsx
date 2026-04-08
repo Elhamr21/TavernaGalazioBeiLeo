@@ -44,13 +44,11 @@ export function MenuPreview() {
             <Link
               key={item.id}
               href="/speisekarte"
-              className={`group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all ${
-                item.id === 89 ? "md:col-span-1" : ""
-              }`}
+              className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
             >
-              <div className={`flex ${item.id === 89 ? "flex-col" : "flex-col sm:flex-row"}`}>
+              <div className="flex flex-col sm:flex-row">
                 {/* Image */}
-                <div className={`${item.id === 89 ? "aspect-video" : "sm:w-2/5 aspect-square sm:aspect-auto"} relative overflow-hidden`}>
+                <div className="sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden">
                   <img
                     src={dishImages[item.id]}
                     alt={item.name}
@@ -58,7 +56,7 @@ export function MenuPreview() {
                   />
                 </div>
                 {/* Content */}
-                <div className={`${item.id === 89 ? "p-4" : "sm:w-3/5 p-6"} flex flex-col justify-center`}>
+                <div className="sm:w-3/5 p-6 flex flex-col justify-center">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-accent text-xs font-medium uppercase tracking-wider">
                       {item.category}
@@ -67,10 +65,10 @@ export function MenuPreview() {
                       {item.price} €
                     </span>
                   </div>
-                  <h3 className={`font-serif text-foreground font-medium mb-2 ${item.id === 89 ? "text-base" : "text-xl"}`}>
+                  <h3 className="font-serif text-xl text-foreground font-medium mb-2">
                     {item.name}
                   </h3>
-                  <p className={`text-muted-foreground text-sm leading-relaxed ${item.id === 89 ? "line-clamp-1" : "line-clamp-3"}`}>
+                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
                     {item.description}
                   </p>
                 </div>
