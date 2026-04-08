@@ -4,11 +4,12 @@ import { featuredDishes } from "@/lib/menu-data"
 import { ArrowRight } from "lucide-react"
 
 const dishImages: Record<number, string> = {
-  2: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2069&auto=format&fit=crop", // Pikilia
-  57: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?q=80&w=2070&auto=format&fit=crop", // Mix Grill
-  89: "https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=2074&auto=format&fit=crop", // Moussaka
-  41: "https://images.unsplash.com/photo-1514516345957-556ca7d90a29?q=80&w=2070&auto=format&fit=crop", // Lamb
+  2: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&h=600&fit=crop",
+  57: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?q=80&w=800&h=600&fit=crop",
+  89: "https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&h=600&fit=crop",
+  41: "https://images.unsplash.com/photo-1514516345957-556ca7d90a29?q=80&w=800&h=600&fit=crop",
 }
+
 
 export function MenuPreview() {
   return (
