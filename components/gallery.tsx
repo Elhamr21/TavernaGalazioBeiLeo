@@ -5,14 +5,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const galleryImages = [
   {
-    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop",
+    src: "images/ambient1.png",
     alt: "Restaurant Innenbereich",
     caption: "Elegantes Ambiente",
   },
   {
-    src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2074&auto=format&fit=crop",
+    src: "images/ambient2.jpg",
     alt: "Außenterrasse mit Tischen",
-    caption: "Terrasse im Freien",
+    caption: "Stilvolles Ambiente",
   },
   {
     src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop",

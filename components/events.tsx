@@ -73,7 +73,7 @@ export function Events() {
           <div className="relative">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=2070&auto=format&fit=crop"
+                src="images/photoforevents.jpg"
                 alt="Private Dinner Veranstaltung"
                 className="w-full h-full object-cover"
               />
