@@ -54,7 +54,7 @@ export function Hero() {
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 py-6 text-lg font-medium"
             >
-              <Link href="#reservieren">Tisch reservieren</Link>
+              <Link href="#kontakt">Tisch reservieren</Link>
             </Button>
             <Button
               asChild
