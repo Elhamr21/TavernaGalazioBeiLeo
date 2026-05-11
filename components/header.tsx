@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, Phone } from "lucide-react"
@@ -37,20 +37,16 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex flex-col">
-          <span className={cn(
-            "font-serif text-xl font-semibold tracking-tight transition-colors",
-            isScrolled ? "text-foreground" : "text-card"
-          )}>
-            Taverna Galazio
-          </span>
-          <span className={cn(
-            "text-xs tracking-widest uppercase transition-colors",
-            isScrolled ? "text-muted-foreground" : "text-card/80"
-          )}>
-            bei Leo
-          </span>
-        </Link>
+<Link href="/" className="flex items-center">
+  <Image
+    src="/images/logo.png"
+    alt="Taverna Galazio bei Leo"
+    width={84}
+    height={84}
+    className="h-18 w-auto object-contain"
+    priority
+  />
+</Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
