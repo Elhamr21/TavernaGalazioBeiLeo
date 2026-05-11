@@ -16,39 +16,38 @@ export function ReservationCTA() {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6 text-balance">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 sm:mb-6 text-balance">
             Bereit für ein authentisch
-            <br />
+            <br className="hidden sm:inline" />
             <span className="text-accent">griechisches Erlebnis?</span>
           </h2>
-          <p className="text-primary-foreground/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
+          <p className="text-primary-foreground/80 text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-10 max-w-2xl mx-auto px-4">
             Erleben Sie einen unvergesslichen Abend mit mediterranen Aromen, herzlicher 
             Gastfreundschaft und elegantem Ambiente. Reservieren Sie noch heute Ihren Tisch.
           </p>
           
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 w-full px-4 sm:px-0">
             <Button
               asChild
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-10 py-6 text-lg font-medium"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 sm:px-10 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
             >
               <a href="#reservieren">Online buchen</a>
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
-              className="bg-transparent border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 rounded-full px-10 py-6 text-lg font-medium"
+              className="bg-transparent border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 rounded-full px-8 sm:px-10 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
             >
-              <a href="tel:+4934156113223" className="flex items-center gap-2">
-                <Phone className="h-5 w-5" />
-                +49 341 56113223
+              <a href="tel:+4934156113223" className="flex items-center justify-center gap-2">
+                <Phone className="h-4 sm:h-5 w-4 sm:w-5" />
+                <span className="hidden sm:inline">+49 341 56113223</span>
+                <span className="sm:hidden">Anrufen</span>
               </a>
             </Button>
           </div>
           
-          <p className="text-primary-foreground/60 text-sm">
+          <p className="text-primary-foreground/60 text-xs sm:text-sm">
             Für Gruppen ab 8 Personen rufen Sie uns bitte direkt an
           </p>
         </div>

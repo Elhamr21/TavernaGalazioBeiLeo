@@ -20,14 +20,14 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-background py-16 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8 mb-8 sm:mb-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="mb-6">
-              <span className="font-serif text-2xl font-semibold block">Taverna Galazio</span>
-              <span className="text-background/60 text-sm">bei Leo</span>
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="mb-4 sm:mb-6">
+              <span className="font-serif text-xl sm:text-2xl font-semibold block">Taverna Galazio</span>
+              <span className="text-background/60 text-xs sm:text-sm">bei Leo</span>
             </div>
-            <p className="text-background/70 text-sm leading-relaxed">
+            <p className="text-background/70 text-xs sm:text-sm leading-relaxed">
               Authentische griechische Küche im Herzen von Leipzig. Erleben Sie mediterrane 
               Gastfreundschaft vom Feinsten.
             </p>
@@ -35,13 +35,13 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-medium mb-4">Schnellzugriff</h3>
-            <ul className="space-y-3">
+            <h3 className="font-medium mb-3 sm:mb-4 text-sm sm:text-base">Schnellzugriff</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
                     href={link.href}
-                    className="text-background/70 text-sm hover:text-background transition-colors"
+                    className="text-background/70 text-xs sm:text-sm hover:text-background transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -52,8 +52,8 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-medium mb-4">Kontakt</h3>
-            <address className="text-background/70 text-sm not-italic space-y-3">
+            <h3 className="font-medium mb-3 sm:mb-4 text-sm sm:text-base">Kontakt</h3>
+            <address className="text-background/70 text-xs sm:text-sm not-italic space-y-2 sm:space-y-3">
               <p>
                 Altes Dorf 16
                 <br />
@@ -69,10 +69,10 @@ export function Footer() {
 
           {/* Opening Hours */}
           <div>
-            <h3 className="font-medium mb-4">Öffnungszeiten</h3>
-            <div className="space-y-2">
+            <h3 className="font-medium mb-3 sm:mb-4 text-sm sm:text-base">Öffnungszeiten</h3>
+            <div className="space-y-1 sm:space-y-2">
               {openingHours.map((item) => (
-                <div key={item.day} className="flex justify-between text-sm">
+                <div key={item.day} className="flex justify-between text-xs sm:text-sm">
                   <span className="text-background/70">{item.day}</span>
                   <span className={item.hours === "Geschlossen" ? "text-background/50" : "text-background/70"}>
                     {item.hours}
@@ -84,19 +84,19 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-background/10 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-background/50 text-sm">
+        <div className="border-t border-background/10 pt-6 sm:pt-8">
+          <div className="flex flex-col gap-4 sm:gap-6">
+            <p className="text-background/50 text-xs sm:text-sm text-center sm:text-left">
               © {new Date().getFullYear()} Taverna Galazio bei Leo. Alle Rechte vorbehalten.
             </p>
-            <div className="flex items-center gap-6">
-              <Link href="/datenschutz" className="text-background/50 text-sm hover:text-background transition-colors">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
+              <Link href="/datenschutz" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
                 Datenschutz
               </Link>
-              <Link href="/impressum" className="text-background/50 text-sm hover:text-background transition-colors">
+              <Link href="/impressum" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
                 Impressum
               </Link>
-              <Link href="/agb" className="text-background/50 text-sm hover:text-background transition-colors">
+              <Link href="/agb" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
                 AGB
               </Link>
             </div>

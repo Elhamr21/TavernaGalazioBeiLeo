@@ -36,14 +36,14 @@ export function Header() {
           : "bg-transparent py-5"
       )}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
-<Link href="/" className="flex items-center">
+      <div className="container mx-auto px-3 sm:px-4 flex items-center justify-between">
+<Link href="/" className="flex items-center flex-shrink-0">
   <Image
     src="/images/logo.png"
     alt="Taverna Galazio bei Leo"
     width={84}
     height={84}
-    className="h-18 w-auto object-contain"
+    className="h-14 sm:h-18 w-auto object-contain"
     priority
   />
 </Link>

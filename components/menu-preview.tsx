@@ -16,12 +16,12 @@ export function MenuPreview() {
     <section id="speisekarte" className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 px-2 sm:px-0">
           <div>
-            <span className="text-accent font-medium text-sm uppercase tracking-widest mb-4 block">
+            <span className="text-accent font-medium text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
               Unsere Highlights
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight text-balance">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight text-balance">
               Signature
               <br />
               Griechische Gerichte
@@ -40,16 +40,16 @@ export function MenuPreview() {
         </div>
 
         {/* Menu Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {featuredDishes.map((item) => (
             <Link
               key={item.id}
               href="/speisekarte"
               className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
             >
-              <div className="flex flex-col sm:flex-row">
+              <div className="flex flex-col sm:flex-row h-full">
                 {/* Image */}
-                <div className="sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden">
+                <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden">
                   <img
                     src={dishImages[item.id]}
                     alt={item.name}
@@ -57,19 +57,19 @@ export function MenuPreview() {
                   />
                 </div>
                 {/* Content */}
-                <div className="sm:w-3/5 p-6 flex flex-col justify-center">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="w-full sm:w-3/5 p-4 sm:p-6 flex flex-col justify-center">
+                  <div className="flex items-center justify-between mb-1 sm:mb-2 gap-2">
                     <span className="text-accent text-xs font-medium uppercase tracking-wider">
                       {item.category}
                     </span>
-                    <span className="font-serif text-xl text-foreground font-semibold">
+                    <span className="font-serif text-lg sm:text-xl text-foreground font-semibold whitespace-nowrap">
                       {item.price} €
                     </span>
                   </div>
-                  <h3 className="font-serif text-xl text-foreground font-medium mb-2">
+                  <h3 className="font-serif text-lg sm:text-xl text-foreground font-medium mb-1 sm:mb-2">
                     {item.name}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
                     {item.description}
                   </p>
                 </div>

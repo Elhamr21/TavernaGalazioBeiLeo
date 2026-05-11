@@ -34,40 +34,38 @@ export function Hero() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-card font-medium leading-tight mb-6 text-balance">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-card font-medium leading-tight mb-4 sm:mb-6 text-balance">
             Authentisch griechisch
             <br />
             <span className="text-accent">genießen</span> in Leipzig
           </h1>
 
           {/* Subheadline */}
-          <p className="text-card/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-pretty">
+          <p className="text-card/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed text-pretty px-2">
             Erleben Sie die Wärme mediterraner Gastfreundschaft mit frischen Zutaten, 
             traditionellen Rezepten und einer eleganten Atmosphäre, die Sie an die Küsten 
             Griechenlands entführt.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 w-full px-4 sm:px-0">
             <Button
               asChild
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 py-6 text-lg font-medium"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
             >
               <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5">Tisch reservieren</Link>
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
-              className="bg-transparent border-card/50 text-card hover:bg-card/10 hover:text-card rounded-full px-8 py-6 text-lg font-medium"
+              className="bg-transparent border-card/50 text-card hover:bg-card/10 hover:text-card rounded-full px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
             >
               <Link href="#speisekarte">Speisekarte ansehen</Link>
             </Button>
           </div>
 
           {/* Info Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-card/80 text-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-card/80 text-xs sm:text-sm px-4 text-center">
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               <span>Altes Dorf 16, 04349 Leipzig</span>

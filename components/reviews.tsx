@@ -28,50 +28,50 @@ export function Reviews() {
     <section className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-accent font-medium text-sm uppercase tracking-widest mb-4 block">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-4">
+          <span className="text-accent font-medium text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             Gästebewertungen
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight mb-6 text-balance">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight mb-4 sm:mb-6 text-balance">
             Was unsere Gäste
-            <br />
+            <br className="hidden sm:inline" />
             über uns sagen
           </h2>
           
           {/* Rating Badge */}
-          <div className="inline-flex items-center gap-4 bg-secondary px-8 py-4 rounded-full">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-secondary px-4 sm:px-8 py-3 sm:py-4 rounded-full text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <span className="text-4xl font-serif font-semibold text-foreground">4,9</span>
-              <div className="flex flex-col items-start">
+              <span className="text-3xl sm:text-4xl font-serif font-semibold text-foreground">4,9</span>
+              <div className="flex flex-col items-center sm:items-start">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                    <Star key={i} className="h-3 sm:h-4 w-3 sm:w-4 fill-accent text-accent" />
                   ))}
                 </div>
-                <span className="text-muted-foreground text-xs">423 Bewertungen auf Google</span>
+                <span className="text-muted-foreground text-xs whitespace-nowrap">423 Bewertungen</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="flex gap-0.5 mb-4">
+              <div className="flex gap-0.5 mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                  <Star key={i} className="h-3 sm:h-4 w-3 sm:w-4 fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-foreground leading-relaxed mb-6 line-clamp-5">
+              <p className="text-foreground leading-relaxed mb-4 sm:mb-6 line-clamp-4 sm:line-clamp-5 text-sm sm:text-base">
                 &ldquo;{review.text}&rdquo;
               </p>
-              <div className="flex items-center justify-between pt-4 border-t border-border">
-                <span className="font-medium text-foreground">{review.author}</span>
-                <span className="text-muted-foreground text-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-3 sm:pt-4 border-t border-border">
+                <span className="font-medium text-foreground text-sm sm:text-base">{review.author}</span>
+                <span className="text-muted-foreground text-xs sm:text-sm whitespace-nowrap">
                   {review.source} · {review.date}
                 </span>
               </div>
