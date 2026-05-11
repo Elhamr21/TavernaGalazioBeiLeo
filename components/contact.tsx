@@ -126,7 +126,7 @@ export function Contact() {
                 variant="outline"
                 className="rounded-full px-8 flex-1 border-foreground text-foreground hover:bg-foreground hover:text-background"
               >
-                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.google.com/maps/place/Restaurant+Taverna+Galazio+bei+Leo/@51.3873194,12.4499747,16.25z/data=!4m6!3m5!1s0x47a6573914768d2b:0x3c70f7785fc37d9a!8m2!3d51.3865081!4d12.4518062!16s%2Fg%2F11v_8nf9l0!5m1!1e2?entry=tts&g_ep=EgoyMDI2MDMyMy4xIPu8ASoASAFQAw%3D%3D&skid=b2d26007-5bde-43d3-9ab6-74476af56d96" target="_blank" rel="noopener noreferrer">
                   In Maps öffnen
                 </a>
               </Button>
