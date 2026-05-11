@@ -7,7 +7,7 @@ export function About() {
           <div className="relative">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop"
+                src="images/food1.png"
                 alt="Gegrillte mediterrane Spezialitäten"
                 className="w-full h-full object-cover"
               />
