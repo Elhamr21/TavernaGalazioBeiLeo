@@ -54,7 +54,7 @@ export function Hero() {
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 py-6 text-lg font-medium"
             >
-              <Link href="#kontakt">Tisch reservieren</Link>
+              <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5">Tisch reservieren</Link>
             </Button>
             <Button
               asChild

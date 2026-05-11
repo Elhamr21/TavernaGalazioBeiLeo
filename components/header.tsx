@@ -80,7 +80,7 @@ export function Header() {
             asChild
             className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6"
           >
-            <Link href="#reservieren">Tisch reservieren</Link>
+            <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5">Tisch reservieren</Link>
           </Button>
         </div>
 
@@ -123,7 +123,7 @@ export function Header() {
                 asChild
                 className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full w-full"
               >
-                <Link href="#reservieren" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5" onClick={() => setIsMobileMenuOpen(false)}>
                   Tisch reservieren
                 </Link>
               </Button>
