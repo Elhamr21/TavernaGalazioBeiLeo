@@ -15,24 +15,24 @@ const galleryImages = [
     caption: "Stilvolles Ambiente",
   },
   {
-    src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop",
+    src: "images/best.png",
     alt: "Frische Meeresfrüchteplatte",
     caption: "Frische Meeresfrüchte",
   },
   {
-    src: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=2070&auto=format&fit=crop",
-    alt: "Weingläser und Tischdekoration",
-    caption: "Erlesene Weine",
+    src: "images/drinks.png",
+    alt: "Erlesene coctails",
+    caption: "Erlesene coctails",
   },
   {
-    src: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=2074&auto=format&fit=crop",
-    alt: "Mediterraner Salat",
-    caption: "Frische Salate",
+    src: "images/food3.png",
+    alt: "Spaghetti mit Meeresfrüchten",
+    caption: "Spaghetti mit Meeresfrüchten",
   },
   {
-    src: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=2077&auto=format&fit=crop",
-    alt: "Koch bei der Arbeit",
-    caption: "Unsere Küche",
+    src: "images/food1.png",
+    alt: "Griechischer Salat mit Feta",
+    caption: "Essenz der griechischen Küche",
   },
 ]
 

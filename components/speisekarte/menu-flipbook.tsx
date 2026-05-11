@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import HTMLFlipBook from "react-pageflip"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -62,13 +63,13 @@ export function MenuFlipbook({ categories, onDishClick, isMobile }: MenuFlipbook
 
   const goToNextPage = () => {
     if (bookRef.current && currentPage < totalPages - 1) {
-      bookRef.current.pageFlip().next()
+      bookRef.current.pageFlip().flipNext()
     }
   }
 
   const goToPrevPage = () => {
     if (bookRef.current && currentPage > 0) {
-      bookRef.current.pageFlip().prev()
+      bookRef.current.pageFlip().flipPrev()
     }
   }
 
@@ -149,7 +150,7 @@ export function MenuFlipbook({ categories, onDishClick, isMobile }: MenuFlipbook
           {pages.map((page, idx) => (
             <div
               key={idx}
-              className="w-full h-full p-4 sm:p-8 bg-card text-foreground flex flex-col overflow-y-auto"
+              className="w-full h-full p-4 sm:p-8 bg-white text-foreground flex flex-col overflow-y-auto relative"
               style={{ pageBreakAfter: "always" }}
             >
               <BookPage page={page} onDishClick={onDishClick} />
@@ -198,15 +199,23 @@ interface BookPageProps {
 function BookPage({ page, onDishClick }: BookPageProps) {
   if (page.type === "cover") {
     return (
-      <div className="h-full flex flex-col items-center justify-center text-center">
-        <div className="mb-4 sm:mb-8">
-          <div className="w-10 sm:w-16 h-10 sm:h-16 rounded-full border-2 border-accent mx-auto opacity-30" />
+      <div className="h-full flex flex-col items-center justify-center text-center gap-4 sm:gap-6">
+        <div className="w-20 sm:w-32 h-20 sm:h-32 relative">
+          <Image
+            src="/images/logo.png"
+            alt="Taverna Galazio Logo"
+            fill
+            className="object-contain"
+          />
         </div>
-        <h1 className="font-serif text-xl sm:text-4xl font-medium mb-2 text-foreground">
+        <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-foreground">
           {page.title}
         </h1>
-        <p className="font-serif text-sm sm:text-lg text-muted-foreground">
+        <p className="font-serif text-base sm:text-lg text-muted-foreground">
           {page.description}
+        </p>
+        <p className="text-sm sm:text-base text-muted-foreground italic mt-2 sm:mt-4">
+          Sie können wischen, um die Speisekarte anzusehen
         </p>
       </div>
     )
@@ -214,14 +223,12 @@ function BookPage({ page, onDishClick }: BookPageProps) {
 
   if (page.type === "end") {
     return (
-      <div className="h-full flex flex-col items-center justify-center text-center">
-        <div className="mb-4 sm:mb-8">
-          <div className="w-10 sm:w-16 h-10 sm:h-16 rounded-full border-2 border-accent mx-auto opacity-30" />
-        </div>
-        <h1 className="font-serif text-lg sm:text-3xl font-medium mb-2 sm:mb-4 text-foreground whitespace-pre-line">
+      <div className="h-full flex flex-col items-center justify-center text-center gap-4 sm:gap-6">
+        <div className="w-12 sm:w-20 h-12 sm:h-20 rounded-full border-2 border-accent/30 mb-2 sm:mb-4" />
+        <h1 className="font-serif text-lg sm:text-3xl font-semibold text-foreground whitespace-pre-line">
           {page.title}
         </h1>
-        <p className="font-serif text-sm sm:text-lg text-muted-foreground">
+        <p className="font-serif text-sm sm:text-base text-muted-foreground">
           {page.description}
         </p>
       </div>
@@ -230,27 +237,27 @@ function BookPage({ page, onDishClick }: BookPageProps) {
 
   // Category page
   return (
-    <div className="h-full flex flex-col">
-      <h2 className="font-serif text-lg sm:text-2xl font-semibold mb-3 sm:mb-6 text-accent border-b border-border pb-2 sm:pb-4">
+    <div className="h-full flex flex-col\">
+      <h2 className="font-serif text-lg sm:text-2xl font-semibold mb-3 sm:mb-6 text-accent border-b border-border pb-2 sm:pb-4\">
         {page.title}
       </h2>
 
-      <div className="flex-1 overflow-y-auto space-y-2 sm:space-y-3 pr-1 sm:pr-2">
+      <div className="flex-1 overflow-y-auto space-y-2 sm:space-y-3 pr-1 sm:pr-2\">
         {page.items?.map((item) => (
           <button
             key={item.id}
             onClick={() => onDishClick(item)}
-            className="w-full text-left p-2 sm:p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+            className="w-full text-left p-2 sm:p-3 rounded-lg hover:bg-muted/50 transition-colors group\"
           >
-            <div className="flex items-start justify-between gap-1 sm:gap-2 mb-0.5 sm:mb-1">
-              <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors text-xs sm:text-sm">
+            <div className="flex items-start justify-between gap-1 sm:gap-2 mb-0.5 sm:mb-1\">
+              <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors text-xs sm:text-sm\">
                 {item.name}
               </h3>
-              <span className="font-serif text-xs sm:text-sm text-accent font-semibold flex-shrink-0">
+              <span className="font-serif text-xs sm:text-sm text-accent font-semibold flex-shrink-0\">
                 {item.price}€
               </span>
             </div>
-            <p className="text-xs sm:text-xs text-muted-foreground line-clamp-1 sm:line-clamp-2">
+            <p className="text-xs sm:text-xs text-muted-foreground line-clamp-1 sm:line-clamp-2\">
               {item.description}
             </p>
           </button>

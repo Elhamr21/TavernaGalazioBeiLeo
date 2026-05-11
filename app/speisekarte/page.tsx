@@ -76,12 +76,6 @@ export default function SpeisekartePage() {
 
           {/* Menu Type Selection - Centered */}
           <div className="flex flex-col items-center justify-center gap-4 sm:gap-8 mb-6 sm:mb-8">
-            <div>
-              <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground font-medium text-center">
-                Speisekarte
-              </h1>
-            </div>
-
             <div className="flex gap-2 sm:gap-3 flex-wrap justify-center">
               <Button
                 variant={activeMenu === "hauptkarte" ? "default" : "outline"}
