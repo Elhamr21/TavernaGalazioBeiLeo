@@ -1,252 +1,262 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import HTMLFlipBook from "react-pageflip"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import type { MenuItem, MenuCategory } from "@/lib/menu-data"
 
 const FlipBookAny = HTMLFlipBook as any
-interface MenuFlipbookProps {
-  categories: MenuCategory[]
-  onDishClick: (dish: MenuItem) => void
-  isMobile: boolean
+const PAGE_RATIO = 1190 / 1684
+
+const MENU_PAGES = Array.from({ length: 10 }, (_, index) => {
+  const pageNumber = index.toString().padStart(2, "0")
+
+  return {
+    src: `/menu/menu-page-${pageNumber}.png`,
+    alt:
+      index === 0
+        ? "Taverna Galazio Speisekarte Cover"
+        : `Taverna Galazio Speisekarte Seite ${index}`,
+  }
+})
+
+type BookDimensions = {
+  width: number
+  height: number
 }
 
-interface PageContent {
-  type: "cover" | "category" | "end"
-  title?: string
-  items?: MenuItem[]
-  description?: string
+function getInitialBookDimensions(isMobile: boolean): BookDimensions {
+  return isMobile ? { width: 340, height: 481 } : { width: 520, height: 736 }
 }
 
-export function MenuFlipbook({ categories, onDishClick, isMobile }: MenuFlipbookProps) {
-  const bookRef = useRef<any>(null)
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
-  const [pages, setPages] = useState<PageContent[]>([])
+function calculateBookDimensions(isMobile: boolean): BookDimensions {
+  if (typeof window === "undefined") {
+    return getInitialBookDimensions(isMobile)
+  }
+
+  const viewportWidth = Math.floor(window.visualViewport?.width ?? window.innerWidth)
+  const viewportHeight = Math.floor(window.visualViewport?.height ?? window.innerHeight)
+  const horizontalReserve = isMobile ? 20 : 48
+  const verticalReserve = isMobile ? 190 : 170
+  const maxPageWidth = isMobile ? 680 : 1180
+  const availableWidth = Math.max(240, viewportWidth - horizontalReserve)
+  const availableHeight = Math.max(isMobile ? 390 : 500, viewportHeight - verticalReserve)
+  const widthByBook = isMobile ? availableWidth : availableWidth / 2
+  const widthByHeight = availableHeight * PAGE_RATIO
+  const pageWidth = Math.floor(Math.max(240, Math.min(maxPageWidth, widthByBook, widthByHeight)))
+
+  return {
+    width: pageWidth,
+    height: Math.floor(pageWidth / PAGE_RATIO),
+  }
+}
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const builtPages: PageContent[] = []
+    const media = window.matchMedia("(max-width: 767px)")
+    const update = () => setIsMobile(media.matches)
 
-    builtPages.push({
-      type: "cover",
-      title: "Unsere Speisekarte",
-      description: "Kulinarische Reise durch Griechenland",
-    })
+    update()
+    media.addEventListener("change", update)
 
-    categories.forEach((category) => {
-      builtPages.push({
-        type: "category",
-        title: category.name,
-        items: category.items,
-      })
-    })
+    return () => media.removeEventListener("change", update)
+  }, [])
 
-    builtPages.push({
-      type: "end",
-      title: "Gutes Essen,\nGutes Leben",
-      description: "Vielen Dank für Ihren Besuch",
-    })
+  return isMobile
+}
 
-    setPages(builtPages)
-    setTotalPages(builtPages.length)
-  }, [categories])
+function useBookDimensions(isMobile: boolean) {
+  const [dimensions, setDimensions] = useState<BookDimensions>(() =>
+    getInitialBookDimensions(isMobile),
+  )
 
-  const handleFlip = (e: any) => {
-    setCurrentPage(e.data)
-  }
+  useEffect(() => {
+    const update = () => setDimensions(calculateBookDimensions(isMobile))
+    const visualViewport = window.visualViewport
 
-  const goToNextPage = () => {
-    if (bookRef.current && currentPage < totalPages - 1) {
-      bookRef.current.pageFlip().flipNext()
+    update()
+    window.addEventListener("resize", update)
+    visualViewport?.addEventListener("resize", update)
+
+    return () => {
+      window.removeEventListener("resize", update)
+      visualViewport?.removeEventListener("resize", update)
     }
-  }
+  }, [isMobile])
 
-  const goToPrevPage = () => {
-    if (bookRef.current && currentPage > 0) {
-      bookRef.current.pageFlip().flipPrev()
+  return dimensions
+}
+
+export function MenuFlipbook() {
+  const bookRef = useRef<any>(null)
+  const [currentPage, setCurrentPage] = useState(0)
+  const isMobile = useIsMobile()
+  const dimensions = useBookDimensions(isMobile)
+  const totalPages = MENU_PAGES.length
+  const progress = ((currentPage + 1) / totalPages) * 100
+  const visiblePageCount = isMobile ? 1 : 2
+  const bookWidth = dimensions.width * visiblePageCount
+
+  const goToPrevPage = useCallback(() => {
+    if (currentPage <= 0) return
+    bookRef.current?.pageFlip()?.flipPrev()
+  }, [currentPage])
+
+  const goToNextPage = useCallback(() => {
+    if (currentPage >= totalPages - 1) return
+    bookRef.current?.pageFlip()?.flipNext()
+  }, [currentPage, totalPages])
+
+  const handleFlip = useCallback(
+    (event: { data: number }) => {
+      setCurrentPage(Math.max(0, Math.min(event.data, totalPages - 1)))
+    },
+    [totalPages],
+  )
+
+  useEffect(() => {
+    const preloadIndexes = [currentPage - 1, currentPage + 1, currentPage + 2]
+
+    preloadIndexes.forEach((index) => {
+      const page = MENU_PAGES[index]
+
+      if (!page) return
+
+      const image = new window.Image()
+      image.decoding = "async"
+      image.src = page.src
+    })
+  }, [currentPage])
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault()
+        goToPrevPage()
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault()
+        goToNextPage()
+      }
     }
-  }
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const startX = e.touches[0].clientX
-    ;(e.currentTarget as any).dataset.start = startX
-  }
+    window.addEventListener("keydown", handleKeyDown)
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const startX = Number((e.currentTarget as any).dataset.start)
-    const endX = e.changedTouches[0].clientX
-    const diff = startX - endX
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [goToNextPage, goToPrevPage])
 
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? goToNextPage() : goToPrevPage()
-    }
-  }
-
-  if (pages.length === 0) return null
+  const flipbookKey = useMemo(
+    () => `${isMobile ? "mobile" : "desktop"}-${dimensions.width}-${dimensions.height}`,
+    [dimensions.height, dimensions.width, isMobile],
+  )
 
   return (
-    <div className="space-y-6">
-
-      {/* Flipbook */}
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="flex justify-center"
-      >
-        
-        <FlipBookAny
-          ref={bookRef}
-          width={isMobile ? 280 : 400}
-          height={isMobile ? 400 : 560}
-          size="stretch"
-          showCover={true}
-          useMouseEvents={true}
-          onFlip={handleFlip}
-          flippingTime={900}
-          className="book"
-        >
-          {pages.map((page, idx) => (
-            <div
-              key={idx}
-              className="w-full h-full p-6 sm:p-8 bg-white flex flex-col text-foreground"
-            >
-              <BookPage page={page} onDishClick={onDishClick} />
-            </div>
-          ))}
-        </FlipBookAny>
+    <section className="flex min-h-[calc(100svh-7rem)] w-full flex-col items-center justify-center gap-4 py-3 sm:gap-5 lg:py-4">
+      <div className="text-center">
+        <p className="font-serif text-2xl font-medium text-foreground sm:text-3xl lg:text-4xl">
+          Speisekarte
+        </p>
+        <div className="mx-auto mt-3 h-px w-24 bg-accent/70" />
       </div>
 
-      {/* Navigation */}
-      <div className="flex items-center justify-center gap-4">
+      <div
+        className="relative mx-auto flex max-w-full items-center justify-center"
+        style={{ width: bookWidth, height: dimensions.height }}
+      >
+        <div
+          className="relative flex items-center justify-center overflow-visible rounded-[10px] shadow-[0_24px_70px_rgba(23,30,44,0.22)]"
+          style={{ width: bookWidth, height: dimensions.height }}
+        >
+          <FlipBookAny
+            key={flipbookKey}
+            ref={bookRef}
+            width={dimensions.width}
+            height={dimensions.height}
+            size="fixed"
+            minWidth={dimensions.width}
+            maxWidth={dimensions.width}
+            minHeight={dimensions.height}
+            maxHeight={dimensions.height}
+            maxShadowOpacity={0.42}
+            showCover={isMobile}
+            mobileScrollSupport={true}
+            onFlip={handleFlip}
+            className="luxury-menu-book"
+            style={{ width: bookWidth, height: dimensions.height }}
+            startPage={Math.min(currentPage, totalPages - 1)}
+            drawShadow={true}
+            flippingTime={950}
+            usePortrait={isMobile}
+            startZIndex={30}
+            autoSize={false}
+            clickEventForward={true}
+            useMouseEvents={true}
+            swipeDistance={35}
+            showPageCorners={true}
+            disableFlipByClick={false}
+          >
+            {MENU_PAGES.map((page, index) => (
+              <div
+                key={page.src}
+                className="luxury-menu-page"
+                data-density={index === 0 ? "hard" : "soft"}
+              >
+                <div className="h-full w-full bg-[#fffdf8] p-[clamp(4px,1vw,12px)]">
+                  <img
+                    src={page.src}
+                    alt={page.alt}
+                    className="h-full w-full select-none object-contain"
+                    loading={index <= 1 ? "eager" : "lazy"}
+                    decoding={index <= 1 ? "sync" : "async"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            ))}
+          </FlipBookAny>
+        </div>
+
         <Button
+          type="button"
+          aria-label="Vorherige Seite"
           onClick={goToPrevPage}
           disabled={currentPage === 0}
+          size="icon"
           variant="outline"
+          className="absolute left-2 top-1/2 z-40 size-10 -translate-y-1/2 rounded-full border-primary/15 bg-background/95 text-primary shadow-lg backdrop-blur-md hover:bg-background sm:left-3 xl:-left-14"
         >
-          <ChevronLeft />
+          <ChevronLeft className="size-5" />
         </Button>
 
-        <span className="text-sm text-muted-foreground">
+        <Button
+          type="button"
+          aria-label="Naechste Seite"
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages - 1}
+          size="icon"
+          variant="outline"
+          className="absolute right-2 top-1/2 z-40 size-10 -translate-y-1/2 rounded-full border-primary/15 bg-background/95 text-primary shadow-lg backdrop-blur-md hover:bg-background sm:right-3 xl:-right-14"
+        >
+          <ChevronRight className="size-5" />
+        </Button>
+      </div>
+
+      <div className="flex w-full max-w-md flex-col items-center gap-3 px-4">
+        <span className="font-serif text-sm text-muted-foreground">
           {currentPage + 1} / {totalPages}
         </span>
 
-        <Button
-          onClick={goToNextPage}
-          disabled={currentPage === totalPages - 1}
-          variant="outline"
-        >
-          <ChevronRight />
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-/* ========================= */
-/* BOOK PAGE DESIGN */
-/* ========================= */
-
-function BookPage({
-  page,
-  onDishClick,
-}: {
-  page: PageContent
-  onDishClick: (dish: MenuItem) => void
-}) {
-  /* ================= COVER ================= */
-  if (page.type === "cover") {
-    return (
-      <div className="h-full flex flex-col items-center justify-center text-center gap-6 bg-[#f1f5f9] relative overflow-hidden">
-
-        {/* top navy accent */}
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-blue-200/50" />
-
-        {/* side accents */}
-        <div className="absolute left-0 top-0 h-full w-2 bg-blue-200/60" />
-        <div className="absolute right-0 top-0 h-full w-2 bg-blue-200/60" />
-
-        {/* logo */}
-        <div className="w-28 h-28 sm:w-32 sm:h-32 relative z-10">
-          <Image
-            src="/images/logo.png"
-            alt="logo"
-            fill
-            className="object-contain"
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-primary/10">
+          <div
+            className="h-full origin-left rounded-full bg-accent transition-transform duration-500 ease-out"
+            style={{ transform: `scaleX(${progress / 100})` }}
           />
         </div>
-
-        {/* title */}
-        <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-blue-950 z-10">
-          {page.title}
-        </h1>
-
-        {/* description */}
-        <p className="text-blue-800/80 z-10">
-          {page.description}
-        </p>
-
-        {/* swipe hint */}
-        <p className="text-xs italic text-blue-900/60 z-10">
-          Sie können wischen, um die Speisekarte anzusehen
-        </p>
       </div>
-    )
-  }
-
-  /* ================= END PAGE ================= */
-  if (page.type === "end") {
-    return (
-      <div className="h-full flex flex-col items-center justify-center text-center gap-4">
-        <h1 className="font-serif text-2xl text-blue-950 whitespace-pre-line">
-          {page.title}
-        </h1>
-        <p className="text-muted-foreground">
-          {page.description}
-        </p>
-      </div>
-    )
-  }
-
-  /* ================= CATEGORY PAGE (BROCHURE DESIGN) ================= */
-  return (
-    <div className="h-full flex flex-col bg-[#f8fafc] p-5 relative overflow-hidden">
-
-      {/* top line */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-900 via-blue-600 to-blue-900" />
-
-      {/* title */}
-      <h2 className="font-serif text-xl font-semibold text-blue-950 border-b border-blue-200 pb-3 mb-4">
-        {page.title}
-      </h2>
-
-      {/* items */}
-      <div className="flex-1 overflow-y-auto space-y-3">
-
-        {page.items?.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => onDishClick(item)}
-            className="w-full text-left bg-white/80 border border-blue-100 rounded-lg p-3 shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex justify-between items-start mb-1">
-              <h3 className="text-sm font-semibold text-blue-950">
-                {item.name}
-              </h3>
-              <span className="text-sm font-serif text-blue-900 font-semibold">
-                {item.price}€
-              </span>
-            </div>
-
-            <p className="text-xs text-blue-800/70 line-clamp-2">
-              {item.description}
-            </p>
-          </button>
-        ))}
-
-      </div>
-    </div>
+    </section>
   )
 }

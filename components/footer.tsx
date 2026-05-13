@@ -96,8 +96,8 @@ export function Footer() {
               <Link href="/impressum" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
                 Impressum
               </Link>
-              <Link href="/agb" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
-                AGB
+              <Link href="/cookie-einstellungen" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
+                Cookie Einstellungen ändern
               </Link>
             </div>
           </div>

@@ -1,37 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import { MenuFlipbook } from "@/components/speisekarte/menu-flipbook"
-import { DishModal } from "@/components/speisekarte/dish-modal"
 import { Button } from "@/components/ui/button"
-import { mainMenu, extraMenu } from "@/lib/menu-data"
 import { Home, Phone } from "lucide-react"
-import type { MenuItem } from "@/lib/menu-data"
-
-type MenuType = "hauptkarte" | "extrakarte"
 
 export default function SpeisekartePage() {
-  const [activeMenu, setActiveMenu] = useState<MenuType>("hauptkarte")
-  const [selectedDish, setSelectedDish] = useState<MenuItem | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
-
-  const handleMenuSwitch = (menu: MenuType) => {
-    setActiveMenu(menu)
-  }
-
-  const currentMenu = activeMenu === "hauptkarte" ? mainMenu : extraMenu
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -61,51 +35,23 @@ export default function SpeisekartePage() {
         </div>
       </header>
 
-      <main className="py-6 sm:py-12 lg:py-16">
-        <div className="container mx-auto px-3 sm:px-4">
+      <main className="relative overflow-hidden bg-background">
+        <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-[1800px] flex-col px-3 py-4 sm:px-5 lg:px-8">
           {/* Back to Homepage Button */}
-          <div className="mb-4 sm:mb-8">
+          <div className="mb-2 sm:mb-3">
             <Button
               asChild
               variant="outline"
-              className="rounded-full px-4 sm:px-6 text-xs sm:text-sm"
+              className="rounded-full border-primary/15 bg-background/80 px-4 text-xs shadow-sm backdrop-blur-sm hover:bg-background sm:px-6 sm:text-sm"
             >
               <Link href="/">← Home</Link>
             </Button>
           </div>
 
-          {/* Menu Type Selection - Centered */}
-          <div className="flex flex-col items-center justify-center gap-4 sm:gap-8 mb-6 sm:mb-8">
-            <div className="flex gap-2 sm:gap-3 flex-wrap justify-center">
-              <Button
-                variant={activeMenu === "hauptkarte" ? "default" : "outline"}
-                onClick={() => handleMenuSwitch("hauptkarte")}
-                className="rounded-full px-4 sm:px-6 text-xs sm:text-sm"
-              >
-                Hauptkarte
-              </Button>
-              <Button
-                variant={activeMenu === "extrakarte" ? "default" : "outline"}
-                onClick={() => handleMenuSwitch("extrakarte")}
-                className="rounded-full px-4 sm:px-6 text-xs sm:text-sm"
-              >
-                Extra Karte
-              </Button>
-            </div>
-          </div>
-
           {/* Flipbook */}
-          <MenuFlipbook
-            key={activeMenu}
-            categories={currentMenu}
-            onDishClick={setSelectedDish}
-            isMobile={isMobile}
-          />
+          <MenuFlipbook />
         </div>
       </main>
-
-      {/* Dish Modal */}
-      <DishModal dish={selectedDish} onClose={() => setSelectedDish(null)} />
     </div>
   )
 }
