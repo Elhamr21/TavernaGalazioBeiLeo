@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, Car, Accessibility } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Car, Accessibility } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const openingHours = [
@@ -77,6 +77,22 @@ export function Contact() {
                   className="text-muted-foreground hover:text-accent transition-colors text-sm"
                 >
                   +49 341 56113223
+                </a>
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="flex gap-3 sm:gap-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                <Mail className="h-5 sm:h-6 w-5 sm:w-6 text-accent" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-medium text-foreground mb-0.5 sm:mb-1 text-sm sm:text-base">E-Mail</h3>
+                <a
+                  href="mailto:Tavernagalazio@gmail.com"
+                  className="text-muted-foreground hover:text-accent transition-colors text-sm break-all"
+                >
+                  Tavernagalazio@gmail.com
                 </a>
               </div>
             </div>

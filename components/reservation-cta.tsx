@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
 
+const reservationUrl = "https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5"
+
 export function ReservationCTA() {
   return (
     <section id="reservieren" className="py-24 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
@@ -32,7 +34,7 @@ export function ReservationCTA() {
               asChild
               className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 sm:px-10 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
             >
-              <a href="#reservieren">Online buchen</a>
+              <a href={reservationUrl}>Online buchen</a>
             </Button>
             <Button
               asChild

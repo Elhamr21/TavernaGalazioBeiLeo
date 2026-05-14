@@ -87,7 +87,7 @@ export function Reviews() {
             className="rounded-full px-8 border-foreground text-foreground hover:bg-foreground hover:text-background"
           >
             <Link 
-              href="https://www.google.com/maps/place/Taverna+Galazio" 
+              href="https://maps.app.goo.gl/62snmRvMneN4TrLy7"
               target="_blank"
               rel="noopener noreferrer"
             >
