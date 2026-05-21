@@ -83,25 +83,53 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-background/10 pt-6 sm:pt-8">
-          <div className="flex flex-col gap-4 sm:gap-6">
-            <p className="text-background/50 text-xs sm:text-sm text-center sm:text-left">
-              © {new Date().getFullYear()} Taverna Galazio bei Leo. Alle Rechte vorbehalten.
-            </p>
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6">
-              <Link href="/datenschutz" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
-                Datenschutz
-              </Link>
-              <Link href="/impressum" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
-                Impressum
-              </Link>
-              <Link href="/cookie-einstellungen" className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors">
-                Cookie Einstellungen ändern
-              </Link>
-            </div>
-          </div>
-        </div>
+{/* Divider */}
+<div className="border-t border-background/10 pt-6 sm:pt-8">
+  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
+    
+    {/* Left Side */}
+    <p className="text-background/50 text-xs sm:text-sm text-center md:text-left">
+      © {new Date().getFullYear()} Taverna Galazio bei Leo. Alle Rechte vorbehalten.
+    </p>
+
+    {/* Center */}
+<p className="text-background/50 text-xs sm:text-sm text-center">
+  Developed by{" "}
+  <a
+    href="https://clearline-ai.tech/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-background hover:text-white transition-colors"
+  >
+    ClearLine Tech
+  </a>
+</p>
+
+    {/* Right Side */}
+    <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 sm:gap-6">
+      <Link
+        href="/impressum"
+        className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors"
+      >
+        Impressum
+      </Link>
+
+      <Link
+        href="/datenschutz"
+        className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors"
+      >
+        Datenschutz
+      </Link>
+
+      <Link
+        href="/cookie-einstellungen"
+        className="text-background/50 text-xs sm:text-sm hover:text-background transition-colors"
+      >
+        Cookie Einstellungen
+      </Link>
+    </div>
+  </div>
+</div>
       </div>
     </footer>
   )
