@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex justify-start overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div 
@@ -18,18 +18,22 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-24 pb-16">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl text-left">
+          <br></br>
+                <br></br>
+                <br></br>
           {/* Trust Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mb-8">
+          <div className="flex flex-wrap items-center justify-start gap-4 md:gap-8 mb-8">
             <div className="flex items-center gap-2 bg-card/10 backdrop-blur-sm px-4 py-2 rounded-full">
               <div className="flex items-center gap-1">
                 <Star className="h-4 w-4 fill-accent text-accent" />
+                
                 <span className="text-card font-semibold">4,9</span>
               </div>
               <span className="text-card/80 text-sm">Bewertung</span>
             </div>
             <div className="bg-card/10 backdrop-blur-sm px-4 py-2 rounded-full">
-              <span className="text-card text-sm">423 Google Bewertungen</span>
+              <span className="text-card text-sm">533 Google Bewertungen</span>
             </div>
           </div>
 
@@ -41,14 +45,14 @@ export function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-card/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed text-pretty px-2">
-            Erleben Sie die Wärme mediterraner Gastfreundschaft mit frischen Zutaten, 
-            traditionellen Rezepten und einer eleganten Atmosphäre, die Sie an die Küsten 
-            Griechenlands entführt.
-          </p>
+          <p className="text-left text-card/90 text-base sm:text-lg md:text-xl max-w-2xl mb-6 sm:mb-10 leading-relaxed text-pretty px-2">
+  Erleben Sie die Wärme mediterraner Gastfreundschaft mit frischen Zutaten,
+  traditionellen Rezepten und einer eleganten Atmosphäre, die Sie an die Küsten
+  Griechenlands entführt.
+</p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 w-full px-4 sm:px-0">
+          <div className="flex flex-col sm:flex-row items-center justify-start gap-3 sm:gap-4 mb-8 sm:mb-12 w-full px-4 sm:px-0">
             <Button
               asChild
               className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
@@ -62,10 +66,18 @@ export function Hero() {
             >
               <Link href="#speisekarte">Speisekarte ansehen</Link>
             </Button>
+<Button
+  asChild
+  className="bg-slate-900 text-white hover:bg-slate-800 rounded-full px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
+>
+  <Link href="https://main.d108ethabimuhp.amplifyapp.com/">
+    Cafe La Vita
+  </Link>
+</Button>
           </div>
 
           {/* Info Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-card/80 text-xs sm:text-sm px-4 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-start items-start text-left gap-3 sm:gap-8 text-card/80 text-xs sm:text-sm px-4 text-center">
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               <span>Altes Dorf 16, 04349 Leipzig</span>

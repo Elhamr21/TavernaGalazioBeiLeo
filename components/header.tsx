@@ -37,16 +37,29 @@ export function Header() {
       )}
     >
       <div className="container mx-auto px-3 sm:px-4 flex items-center justify-between">
-<Link href="/" className="flex items-center flex-shrink-0">
-  <Image
-    src="/images/logo.png"
-    alt="Taverna Galazio bei Leo"
-    width={84}
-    height={84}
-    className="h-14 sm:h-18 w-auto object-contain"
-    priority
-  />
-</Link>
+<div className="flex items-center space-x-1">
+  <Link href="/" className="flex items-center flex-shrink-0">
+    <Image
+      src="/images/logo.png"
+      alt="Taverna Galazio bei Leo"
+      width={84}
+      height={84}
+      className="h-14 sm:h-18 w-auto object-contain"
+      priority
+    />
+  </Link>
+
+  <Link href="https://main.d108ethabimuhp.amplifyapp.com/" className="flex items-center flex-shrink-0">
+    <Image
+      src="/images/logo-cafe.png"
+      alt="Taverna Galazio bei Leo"
+      width={84}
+      height={84}
+      className="h-14 sm:h-18 w-auto object-contain"
+      priority
+    />
+  </Link>
+</div>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
