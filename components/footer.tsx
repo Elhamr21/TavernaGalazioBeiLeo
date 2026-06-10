@@ -92,18 +92,6 @@ export function Footer() {
       © {new Date().getFullYear()} Taverna Galazio bei Leo. Alle Rechte vorbehalten.
     </p>
 
-    {/* Center */}
-<p className="text-background/50 text-xs sm:text-sm text-center">
-  Developed by{" "}
-  <a
-    href="https://clearline-ai.tech/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-background hover:text-white transition-colors"
-  >
-    ClearLine Tech
-  </a>
-</p>
 
     {/* Right Side */}
     <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 sm:gap-6">
@@ -130,6 +118,21 @@ export function Footer() {
     </div>
   </div>
 </div>
+
+        {/* Powered By */}
+        <div className="text-center mt-6 sm:mt-8">
+          <p className="text-background/50 text-xs">
+            Powered by{" "}
+            <a
+              href="https://clearline-ai.tech/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background hover:text-white transition-colors"
+            >
+              Clearline Tech
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   )
