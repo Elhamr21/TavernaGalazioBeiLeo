@@ -66,14 +66,14 @@ export function Hero() {
             >
               <Link href="#speisekarte">Speisekarte ansehen</Link>
             </Button>
-<Button
+{/* <Button
   asChild
   className="bg-slate-900 text-white hover:bg-slate-800 rounded-full px-6 sm:px-8 py-3 sm:py-6 text-base sm:text-lg font-medium w-full sm:w-auto"
 >
   <Link href="https://main.d108ethabimuhp.amplifyapp.com/">
     Cafe La Vita
   </Link>
-</Button>
+</Button> */}
           </div>
 
           {/* Info Bar */}
