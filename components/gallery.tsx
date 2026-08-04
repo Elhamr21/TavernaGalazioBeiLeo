@@ -2,42 +2,15 @@
 
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import type { HomepageContent } from "@/lib/content/get-homepage-content"
 
-const galleryImages = [
-  {
-    src: "images/ambient1.png",
-    alt: "Restaurant Innenbereich",
-    caption: "Elegantes Ambiente",
-  },
-  {
-    src: "images/ambient2.jpg",
-    alt: "Außenterrasse mit Tischen",
-    caption: "Stilvolles Ambiente",
-  },
-  {
-    src: "images/best.png",
-    alt: "Frische Meeresfrüchteplatte",
-    caption: "Frische Meeresfrüchte",
-  },
-  {
-    src: "images/drinks.png",
-    alt: "Erlesene coctails",
-    caption: "Erlesene coctails",
-  },
-  {
-    src: "images/food3.png",
-    alt: "Spaghetti mit Meeresfrüchten",
-    caption: "Spaghetti mit Meeresfrüchten",
-  },
-  {
-    src: "images/food1.png",
-    alt: "Griechischer Salat mit Feta",
-    caption: "Essenz der griechischen Küche",
-  },
-]
+interface GalleryProps {
+  content: HomepageContent["gallery"]
+}
 
-export function Gallery() {
+export function Gallery({ content }: GalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const galleryImages = content.images
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % galleryImages.length)
@@ -53,24 +26,21 @@ export function Gallery() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 px-4">
           <span className="text-accent font-medium text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
-            Galerie
+            {content.eyebrow}
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-3 sm:mb-6 text-balance">
-            Ein Einblick in
+            {content.heading1}
             <br className="hidden sm:inline" />
-            unsere Welt
+            {content.heading2}
           </h2>
-          <p className="text-primary-foreground/80 leading-relaxed text-sm sm:text-base">
-            Entdecken Sie das Ambiente, die Küche und die Momente, die Taverna Galazio 
-            zu einem besonderen Ort für jeden Anlass machen.
-          </p>
+          <p className="text-primary-foreground/80 leading-relaxed text-sm sm:text-base">{content.description}</p>
         </div>
 
         {/* Main Gallery Slider */}
         <div className="relative">
           <div className="relative aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] rounded-xl sm:rounded-2xl overflow-hidden">
             <img
-              src={galleryImages[currentIndex].src}
+              src={galleryImages[currentIndex].imageUrl}
               alt={galleryImages[currentIndex].alt}
               className="w-full h-full object-cover transition-opacity duration-500"
             />
@@ -118,7 +88,7 @@ export function Gallery() {
               }`}
             >
               <img
-                src={image.src}
+                src={image.imageUrl}
                 alt={image.alt}
                 className="w-full h-full object-cover"
               />

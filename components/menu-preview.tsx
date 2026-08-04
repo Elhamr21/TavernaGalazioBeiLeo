@@ -1,17 +1,13 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { featuredDishes } from "@/lib/menu-data"
 import { ArrowRight } from "lucide-react"
+import type { HomepageContent } from "@/lib/content/get-homepage-content"
 
-const dishImages: Record<number, string> = {
-  2: "images/food2.png",
-  57: "images/food5.png",
-  89: "images/food1.png",
-  41: "images/food3.png",
+interface MenuPreviewProps {
+  content: HomepageContent["menu"]
 }
 
-
-export function MenuPreview() {
+export function MenuPreview({ content }: MenuPreviewProps) {
   return (
     <section id="speisekarte" className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
@@ -19,12 +15,12 @@ export function MenuPreview() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12 px-2 sm:px-0">
           <div>
             <span className="text-accent font-medium text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
-              Unsere Highlights
+              {content.eyebrow}
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight text-balance">
-              Signature
+              {content.heading1}
               <br />
-              Griechische Gerichte
+              {content.heading2}
             </h2>
           </div>
           <Button
@@ -33,7 +29,7 @@ export function MenuPreview() {
             className="rounded-full px-8 self-start md:self-auto border-foreground text-foreground hover:bg-foreground hover:text-background"
           >
             <Link href="/speisekarte">
-              Komplette Speisekarte
+              {content.linkLabel}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
@@ -41,9 +37,9 @@ export function MenuPreview() {
 
         {/* Menu Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {featuredDishes.map((item) => (
+          {content.items.map((item, index) => (
             <Link
-              key={item.id}
+              key={index}
               href="/speisekarte"
               className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
             >
@@ -51,7 +47,7 @@ export function MenuPreview() {
                 {/* Image */}
                 <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden">
                   <img
-                    src={dishImages[item.id]}
+                    src={item.imageUrl}
                     alt={item.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />

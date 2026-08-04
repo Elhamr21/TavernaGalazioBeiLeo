@@ -5,19 +5,28 @@ import Link from "next/link"
 import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { toTelHref } from "@/lib/content/phone"
+import type { HomepageContent } from "@/lib/content/get-homepage-content"
 
-const navLinks = [
-  { href: "#uber-uns", label: "Über uns" },
-  { href: "#erlebnis", label: "Erlebnis" },
-  { href: "#speisekarte", label: "Speisekarte" },
-  { href: "#galerie", label: "Galerie" },
-  { href: "#events", label: "Events" },
-  { href: "#kontakt", label: "Kontakt" },
-]
+const navAnchors = ["uber-uns", "erlebnis", "speisekarte", "galerie", "events", "kontakt"] as const
 
-export function Header() {
+interface HeaderProps {
+  settings: HomepageContent["siteSettings"]
+  contact: HomepageContent["contactInfo"]
+}
+
+export function Header({ settings, contact }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navLinks = [
+    { href: `#${navAnchors[0]}`, label: settings.navAboutLabel },
+    { href: `#${navAnchors[1]}`, label: settings.navExperienceLabel },
+    { href: `#${navAnchors[2]}`, label: settings.navMenuLabel },
+    { href: `#${navAnchors[3]}`, label: settings.navGalleryLabel },
+    { href: `#${navAnchors[4]}`, label: settings.navEventsLabel },
+    { href: `#${navAnchors[5]}`, label: settings.navContactLabel },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +49,7 @@ export function Header() {
 <div className="flex items-center space-x-1">
   <Link href="/" className="flex items-center flex-shrink-0">
     <Image
-      src="/images/logo.png"
+      src={settings.logoUrl}
       alt="Taverna Galazio bei Leo"
       width={84}
       height={84}
@@ -80,20 +89,20 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+4934156113223"
+            href={toTelHref(contact.phone)}
             className={cn(
               "flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-70",
               isScrolled ? "text-foreground" : "text-card"
             )}
           >
             <Phone className="h-4 w-4" />
-            <span className="hidden xl:inline">+49 341 56113223</span>
+            <span className="hidden xl:inline">{contact.phone}</span>
           </a>
           <Button
             asChild
             className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-6"
           >
-            <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5">Tisch reservieren</Link>
+            <Link href={contact.reservationUrl}>{settings.reservationButtonLabel}</Link>
           </Button>
         </div>
 
@@ -126,18 +135,18 @@ export function Header() {
             ))}
             <div className="flex flex-col gap-3 pt-4">
               <a
-                href="tel:+4934156113223"
+                href={toTelHref(contact.phone)}
                 className="flex items-center gap-2 text-foreground font-medium"
               >
                 <Phone className="h-5 w-5" />
-                +49 341 56113223
+                {contact.phone}
               </a>
               <Button
                 asChild
                 className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full w-full"
               >
-                <Link href="https://reservation.dish.co/widget/hydra-56ceb440-f22d-11ec-a5b8-61d0b9e3e1b5" onClick={() => setIsMobileMenuOpen(false)}>
-                  Tisch reservieren
+                <Link href={contact.reservationUrl} onClick={() => setIsMobileMenuOpen(false)}>
+                  {settings.reservationButtonLabel}
                 </Link>
               </Button>
             </div>

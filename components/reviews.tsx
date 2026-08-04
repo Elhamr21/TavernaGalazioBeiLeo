@@ -1,54 +1,41 @@
 import { Star } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import type { HomepageContent } from "@/lib/content/get-homepage-content"
 
-const reviews = [
-  {
-    text: "The best restaurant!! The food was perfect!! The best in town!! The atmosphere beautiful music and calm. Leo the owner of Galazio very friendly guy!! I will go there every time I go in Germany!! Keep going guys! You are the best! Danke Leo!",
-    author: "Ester-katerina M.",
-    source: "Google",
-    date: "Mai 2025",
-  },
-  {
-    text: "Wunderbares Essen und fantastischer Service! Das Lamm war perfekt zubereitet und die Atmosphäre war genau richtig für einen romantischen Abend. Wir kommen definitiv wieder!",
-    author: "Thomas K.",
-    source: "Google",
-    date: "April 2025",
-  },
-  {
-    text: "Ein Stück Griechenland mitten in Leipzig. Die Qualität der Zutaten schmeckt man in jedem Bissen. Besonders der Oktopus ist ein Gedicht!",
-    author: "Maria S.",
-    source: "Google",
-    date: "März 2025",
-  },
-]
+// External destination — not restaurant content, stays under developer control.
+const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/62snmRvMneN4TrLy7"
 
-export function Reviews() {
+interface ReviewsProps {
+  content: HomepageContent["reviews"]
+}
+
+export function Reviews({ content }: ReviewsProps) {
   return (
     <section className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-4">
           <span className="text-accent font-medium text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
-            Gästebewertungen
+            {content.eyebrow}
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground font-medium leading-tight mb-4 sm:mb-6 text-balance">
-            Was unsere Gäste
+            {content.heading1}
             <br className="hidden sm:inline" />
-            über uns sagen
+            {content.heading2}
           </h2>
-          
+
           {/* Rating Badge */}
           <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 bg-secondary px-4 sm:px-8 py-3 sm:py-4 rounded-full text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <span className="text-3xl sm:text-4xl font-serif font-semibold text-foreground">4,9</span>
+              <span className="text-3xl sm:text-4xl font-serif font-semibold text-foreground">{content.aggregateRating}</span>
               <div className="flex flex-col items-center sm:items-start">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3 sm:h-4 w-3 sm:w-4 fill-accent text-accent" />
                   ))}
                 </div>
-                <span className="text-muted-foreground text-xs whitespace-nowrap">423 Bewertungen</span>
+                <span className="text-muted-foreground text-xs whitespace-nowrap">{content.aggregateCount}</span>
               </div>
             </div>
           </div>
@@ -56,13 +43,13 @@ export function Reviews() {
 
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
-          {reviews.map((review, index) => (
+          {content.items.map((review, index) => (
             <div
               key={index}
               className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex gap-0.5 mb-3 sm:mb-4">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(review.rating)].map((_, i) => (
                   <Star key={i} className="h-3 sm:h-4 w-3 sm:w-4 fill-accent text-accent" />
                 ))}
               </div>
@@ -86,12 +73,12 @@ export function Reviews() {
             variant="outline"
             className="rounded-full px-8 border-foreground text-foreground hover:bg-foreground hover:text-background"
           >
-            <Link 
-              href="https://maps.app.goo.gl/62snmRvMneN4TrLy7"
+            <Link
+              href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Alle Bewertungen auf Google lesen
+              {content.ctaLabel}
             </Link>
           </Button>
         </div>
