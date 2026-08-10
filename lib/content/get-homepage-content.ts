@@ -99,11 +99,17 @@ export async function getHomepageContent() {
   const reservationCta = reservationCtaRecord ?? defaults.reservationCtaDefaults
   const footer = footerRecord ?? defaults.footerDefaults
 
+  // Resolve from the raw *Record (null when no DB row exists at all), never
+  // from the post-`??` merged object above — when a record is missing, its
+  // merged stand-in is the defaults object, whose image field is a local
+  // /public path string, not an S3 key. Passing that into resolveImageUrl
+  // would treat it as a real S3 path and produce a broken presigned URL
+  // instead of falling back to the local asset.
   const [logoUrl, heroBackgroundUrl, aboutImageUrl, eventsImageUrl] = await Promise.all([
-    resolveImageUrl(siteSettings.logoPath, defaults.siteSettingsLogoFallback),
-    resolveImageUrl(hero.backgroundImagePath, defaults.heroDefaults.backgroundImagePath),
-    resolveImageUrl(about.imagePath, defaults.aboutDefaults.imagePath),
-    resolveImageUrl(eventsSection.imagePath, defaults.eventsSectionDefaults.imagePath),
+    resolveImageUrl(siteSettingsRecord?.logoPath, defaults.siteSettingsLogoFallback),
+    resolveImageUrl(heroRecord?.backgroundImagePath, defaults.heroDefaults.backgroundImagePath),
+    resolveImageUrl(aboutRecord?.imagePath, defaults.aboutDefaults.imagePath),
+    resolveImageUrl(eventsSectionRecord?.imagePath, defaults.eventsSectionDefaults.imagePath),
   ])
 
   const experienceFeatureList =
