@@ -59,7 +59,7 @@ export function Reviews({ content }: ReviewsProps) {
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-3 sm:pt-4 border-t border-border">
                 <span className="font-medium text-foreground text-sm sm:text-base">{review.author}</span>
                 <span className="text-muted-foreground text-xs sm:text-sm whitespace-nowrap">
-                  {review.source} · {review.date}
+                  {review.source}
                 </span>
               </div>
             </div>

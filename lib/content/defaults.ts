@@ -37,7 +37,7 @@ export const contactInfoDefaults = {
 export const heroDefaults = {
   ratingValue: "4,9",
   ratingLabel: "Bewertung",
-  ratingCountLabel: "533 Google Bewertungen",
+  ratingCountLabel: "557 Google Bewertungen",
   headlinePart1: "Authentisch griechisch",
   headlineAccent: "genießen",
   headlinePart2: " in Leipzig",
@@ -114,6 +114,7 @@ export const menuCategoriesDefaults = [
   { name: "Vom Grill", sortOrder: 1 },
   { name: "Extra Karte", sortOrder: 2 },
   { name: "Aus dem Backofen", sortOrder: 3 },
+  { name: "Getränke", sortOrder: 4 },
 ]
 
 /**
@@ -124,11 +125,12 @@ export const menuCategoriesDefaults = [
  */
 export const menuItemsDefaults = [
   {
-    category: "Vorspeisen",
-    name: "Pikilia Galazio Platte",
-    description: "Eine Kreation aus warmen und kalten köstlichen mediterranen Vorspeisen (für 2 Personen) - Sehr zum Empfehlen!",
+    // TODO: real price — placeholder until confirmed
+    category: "Getränke",
+    name: "Galazio Cocktail-Turm",
+    description: "Bunte Auswahl handgemachter Cocktails – fruchtig, erfrischend und mit frischer Minze verfeinert, serviert auf unserem Cocktail-Turm. Perfekt zum Anstoßen mit Freunden.",
     price: "18,90",
-    imagePath: "images/food2.png",
+    imagePath: "images/food2.jpg",
     sortOrder: 0,
   },
   {
@@ -136,7 +138,7 @@ export const menuItemsDefaults = [
     name: "Galazio Special Teller Mix 5*",
     description: "Hähnchenbrust gegrillt, Lammkotelett, Gyros, Souvlaki, Schweinefiletlende mit Tzatziki, dazu kretanische Kartoffeln",
     price: "26,90",
-    imagePath: "images/food5.png",
+    imagePath: "images/food5.jpg",
     sortOrder: 1,
   },
   {
@@ -220,32 +222,32 @@ export const reviewsSectionDefaults = {
   heading1: "Was unsere Gäste",
   heading2: "über uns sagen",
   aggregateRating: "4,9",
-  aggregateCount: "423 Bewertungen",
+  aggregateCount: "557 Bewertungen",
   ctaLabel: "Alle Bewertungen auf Google lesen",
 }
 
 export const reviewsDefaults = [
+  {
+    author: "Armant R.",
+    text: "We went for dinner with my girlfriend and everything was fantastic, food, drinks. The service was outstanding as well.",
+    source: "Google",
+    date: "November 2025",
+    rating: 5,
+    sortOrder: 0,
+  },
   {
     author: "Ester-katerina M.",
     text: "The best restaurant!! The food was perfect!! The best in town!! The atmosphere beautiful music and calm. Leo the owner of Galazio very friendly guy!! I will go there every time I go in Germany!! Keep going guys! You are the best! Danke Leo!",
     source: "Google",
     date: "Mai 2025",
     rating: 5,
-    sortOrder: 0,
-  },
-  {
-    author: "Thomas K.",
-    text: "Wunderbares Essen und fantastischer Service! Das Lamm war perfekt zubereitet und die Atmosphäre war genau richtig für einen romantischen Abend. Wir kommen definitiv wieder!",
-    source: "Google",
-    date: "April 2025",
-    rating: 5,
     sortOrder: 1,
   },
   {
-    author: "Maria S.",
-    text: "Ein Stück Griechenland mitten in Leipzig. Die Qualität der Zutaten schmeckt man in jedem Bissen. Besonders der Oktopus ist ein Gedicht!",
+    author: "Anirban A.",
+    text: "The best Greek food in Leipzig. Best food! Best wine! Fantastic people & service. That's why we are regulars & it's our favorite family restaurant. Leo has become more like family!",
     source: "Google",
-    date: "März 2025",
+    date: "2025",
     rating: 5,
     sortOrder: 2,
   },

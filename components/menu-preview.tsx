@@ -35,41 +35,19 @@ export function MenuPreview({ content }: MenuPreviewProps) {
           </Button>
         </div>
 
-        {/* Menu Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+        {/* Menu Grid — image-only gallery */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {content.items.map((item, index) => (
             <Link
               key={index}
               href="/speisekarte"
-              className="group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
+              className="group relative block aspect-square overflow-hidden rounded-2xl bg-card shadow-sm hover:shadow-lg transition-all"
             >
-              <div className="flex flex-col sm:flex-row h-full">
-                {/* Image */}
-                <div className="w-full sm:w-2/5 aspect-square sm:aspect-auto relative overflow-hidden">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                {/* Content */}
-                <div className="w-full sm:w-3/5 p-4 sm:p-6 flex flex-col justify-center">
-                  <div className="flex items-center justify-between mb-1 sm:mb-2 gap-2">
-                    <span className="text-accent text-xs font-medium uppercase tracking-wider">
-                      {item.category}
-                    </span>
-                    <span className="font-serif text-lg sm:text-xl text-foreground font-semibold whitespace-nowrap">
-                      {item.price} €
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-lg sm:text-xl text-foreground font-medium mb-1 sm:mb-2">
-                    {item.name}
-                  </h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
+              <img
+                src={item.imageUrl}
+                alt={item.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </Link>
           ))}
         </div>
