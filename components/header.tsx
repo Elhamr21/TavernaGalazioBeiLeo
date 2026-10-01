@@ -39,10 +39,8 @@ export function Header({ settings, contact }: HeaderProps) {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-card/95 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-card/95 backdrop-blur-md shadow-sm",
+        isScrolled ? "py-3" : "py-5"
       )}
     >
       <div className="container mx-auto px-3 sm:px-4 flex items-center justify-between">
@@ -76,10 +74,7 @@ export function Header({ settings, contact }: HeaderProps) {
             <Link
               key={link.href}
               href={link.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:opacity-70",
-                isScrolled ? "text-foreground" : "text-card"
-              )}
+              className="text-sm font-medium text-foreground transition-colors hover:opacity-70"
             >
               {link.label}
             </Link>
@@ -90,10 +85,7 @@ export function Header({ settings, contact }: HeaderProps) {
         <div className="hidden lg:flex items-center gap-4">
           <a
             href={toTelHref(contact.phone)}
-            className={cn(
-              "flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-70",
-              isScrolled ? "text-foreground" : "text-card"
-            )}
+            className="flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:opacity-70"
           >
             <Phone className="h-4 w-4" />
             <span className="hidden xl:inline">{contact.phone}</span>
@@ -109,10 +101,7 @@ export function Header({ settings, contact }: HeaderProps) {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={cn(
-            "lg:hidden p-2 transition-colors",
-            isScrolled ? "text-foreground" : "text-card"
-          )}
+          className="lg:hidden p-2 text-foreground transition-colors"
           aria-label={isMobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
         >
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
