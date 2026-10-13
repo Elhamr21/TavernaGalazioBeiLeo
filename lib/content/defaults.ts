@@ -170,7 +170,7 @@ export const gallerySectionDefaults = {
 export const galleryImagesDefaults = [
   { imagePath: "images/ambient1.png", alt: "Restaurant Innenbereich", caption: "Elegantes Ambiente", sortOrder: 0 },
   { imagePath: "images/ambient2.jpg", alt: "Außenterrasse mit Tischen", caption: "Stilvolles Ambiente", sortOrder: 1 },
-  { imagePath: "images/best.png", alt: "Frische Meeresfrüchteplatte", caption: "Frische Meeresfrüchte", sortOrder: 2 },
+  { imagePath: "images/food.png", alt: "Frische Meeresfrüchteplatte", caption: "Frische Meeresfrüchte", sortOrder: 2 },
   { imagePath: "images/drinks.png", alt: "Erlesene coctails", caption: "Erlesene coctails", sortOrder: 3 },
   { imagePath: "images/food3.png", alt: "Spaghetti mit Meeresfrüchten", caption: "Spaghetti mit Meeresfrüchten", sortOrder: 4 },
   { imagePath: "images/food1.png", alt: "Griechischer Salat mit Feta", caption: "Essenz der griechischen Küche", sortOrder: 5 },

@@ -56,10 +56,10 @@ export function Header({ settings, contact }: HeaderProps) {
     />
   </Link>
 
-  <Link href="https://main.d108ethabimuhp.amplifyapp.com/" className="flex items-center flex-shrink-0">
+  <Link href="https://cafe-la-vita.de" className="flex items-center flex-shrink-0">
     <Image
       src="/images/logo-cafe.png"
-      alt="Taverna Galazio bei Leo"
+      alt="Café La Vita bei Leo"
       width={84}
       height={84}
       className="h-14 sm:h-18 w-auto object-contain"
