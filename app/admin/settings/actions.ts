@@ -10,5 +10,5 @@ export async function saveSiteSettings(input: unknown) {
 }
 
 export async function saveContactInfo(input: unknown) {
-  return upsertSingleton(cookiesClient.models.ContactInfo, SINGLETON_IDS.contactInfo, contactInfoSchema, input, ["/"])
+  return upsertSingleton(cookiesClient.models.ContactInfo, SINGLETON_IDS.contactInfo, contactInfoSchema, input, ["/", "/speisekarte"])
 }

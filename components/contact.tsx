@@ -12,11 +12,15 @@ const openingHours = [
 ]
 
 // Map embed / destination links stay hardcoded — technical configuration, not content.
+// All three target the restaurant's Google place (0x47a6573914768d2b:0x3c70f7785fc37d9a,
+// Altes Dorf 16, 04349 Leipzig — 51.3865081, 12.4518062).
 const MAPS_EMBED_SRC =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.8!2d12.4!3d51.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDI0JzAwLjAiTiAxMsKwMjQnMDAuMCJF!5e0!3m2!1sde!2sde!4v1"
-const ROUTE_PLANNER_URL = "https://maps.google.com"
-const MAPS_PLACE_URL =
-  "https://www.google.com/maps/place/Restaurant+Taverna+Galazio+bei+Leo/@51.3873194,12.4499747,16.25z/data=!4m6!3m5!1s0x47a6573914768d2b:0x3c70f7785fc37d9a!8m2!3d51.3865081!4d12.4518062!16s%2Fg%2F11v_8nf9l0!5m1!1e2?entry=tts&g_ep=EgoyMDI2MDMyMy4xIPu8ASoASAFQAw%3D%3D&skid=b2d26007-5bde-43d3-9ab6-74476af56d96"
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1245.5!2d12.4518062!3d51.3865081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a6573914768d2b%3A0x3c70f7785fc37d9a!2sRestaurant%20Taverna%20Galazio%20bei%20Leo!5e0!3m2!1sde!2sde!4v1762540000000!5m2!1sde!2sde"
+// Official Maps URL for directions — opens the Google Maps app on phones, the website on desktop.
+const ROUTE_PLANNER_URL =
+  "https://www.google.com/maps/dir/?api=1&destination=Restaurant%20Taverna%20Galazio%20bei%20Leo%2C%20Altes%20Dorf%2016%2C%2004349%20Leipzig"
+// Share link supplied by the restaurant — opens the place in the Google Maps app.
+const MAPS_PLACE_URL = "https://maps.app.goo.gl/X6RNK6brS1DsCKME9"
 
 interface ContactProps {
   content: HomepageContent["contactSection"]

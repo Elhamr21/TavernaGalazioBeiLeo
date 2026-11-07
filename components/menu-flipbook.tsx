@@ -93,9 +93,9 @@ function DishModal({ dish, isOpen, onClose }: DishModalProps) {
               variant="ghost"
               className="w-full rounded-full text-muted-foreground hover:text-foreground"
             >
-              <a href="tel:+493419129678">
+              <a href="tel:+4934156113223">
                 <Phone className="w-4 h-4 mr-2" />
-                Anrufen: 0341 9129678
+                Anrufen: +49 341 56113223
               </a>
             </Button>
           </div>

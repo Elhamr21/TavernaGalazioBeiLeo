@@ -1,11 +1,16 @@
-"use client"
-
 import Link from "next/link"
 import { MenuFlipbook } from "@/components/speisekarte/menu-flipbook"
 import { Button } from "@/components/ui/button"
 import { Home, Phone } from "lucide-react"
+import { getContactInfo } from "@/lib/content/get-homepage-content"
+import { toTelHref } from "@/lib/content/phone"
 
-export default function SpeisekartePage() {
+// Phone number comes from the CMS (Einstellungen → Kontaktdaten), same as the homepage.
+export const revalidate = 60
+
+export default async function SpeisekartePage() {
+  const contact = await getContactInfo()
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -21,11 +26,12 @@ export default function SpeisekartePage() {
             </Link>
             <div className="flex items-center gap-2 sm:gap-4">
               <a
-                href="tel:+493412628561"
+                href={toTelHref(contact.phone)}
+                aria-label={`Anrufen: ${contact.phone}`}
                 className="flex items-center gap-1 sm:gap-2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Phone className="w-3 sm:w-4 h-3 sm:h-4" />
-                <span className="hidden sm:inline text-xs sm:text-sm">0341 262 856 1</span>
+                <span className="hidden sm:inline text-xs sm:text-sm">{contact.phone}</span>
               </a>
               <Button asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-xs sm:text-sm px-3 sm:px-4 py-2">
                 <Link href="/#reservieren">Reservieren</Link>

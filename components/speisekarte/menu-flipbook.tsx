@@ -7,12 +7,15 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const FlipBookAny = HTMLFlipBook as any
 const PAGE_RATIO = 1190 / 1684
+// Bump whenever the page images change (e.g. new prices) so browsers and the CDN
+// don't keep serving cached copies under the same file names.
+const MENU_VERSION = "2026-11"
 
 const MENU_PAGES = Array.from({ length: 10 }, (_, index) => {
   const pageNumber = index.toString().padStart(2, "0")
 
   return {
-    src: `/menu/menu-page-${pageNumber}.png`,
+    src: `/menu/menu-page-${pageNumber}.png?v=${MENU_VERSION}`,
     alt:
       index === 0
         ? "Taverna Galazio Speisekarte Cover"

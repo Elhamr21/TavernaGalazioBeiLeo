@@ -176,6 +176,15 @@ export async function getHomepageContent() {
   }
 }
 
+/** Just the contact details, for pages outside the homepage (e.g. /speisekarte). */
+export async function getContactInfo() {
+  const record = await fetchSingleton(
+    () => publicClient.models.ContactInfo.get({ id: SINGLETON_IDS.contactInfo }),
+    null,
+  )
+  return record ?? defaults.contactInfoDefaults
+}
+
 export type HomepageContent = Awaited<ReturnType<typeof getHomepageContent>>
 export type MenuItemView = HomepageContent["menu"]["items"][number]
 export type GalleryImageView = HomepageContent["gallery"]["images"][number]
