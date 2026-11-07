@@ -16,6 +16,10 @@ node_modules
 .DS_Store
 *.tsbuildinfo
 
+# Windows "downloaded from internet" metadata (NTFS alternate data streams
+# leaked as files via WSL). The ":" in the name breaks checkout on Windows.
+*Zone.Identifier
+
 # AWS Amplify Gen 2 — generated per-environment, never committed
 amplify_outputs*
 .amplify/
