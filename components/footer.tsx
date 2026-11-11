@@ -1,14 +1,7 @@
 import Link from "next/link"
 import { toTelHref } from "@/lib/content/phone"
 import type { HomepageContent } from "@/lib/content/get-homepage-content"
-
-// Opening hours stay hardcoded per the CMS content rules (not admin-managed).
-const openingHours = [
-  { day: "Montag", hours: "Geschlossen" },
-  { day: "Di - Fr", hours: "17:00 - 23:00" },
-  { day: "Samstag", hours: "11:30 - 23:00" },
-  { day: "Sonntag", hours: "11:30 - 23:00" },
-]
+import { OpeningHours } from "@/components/opening-hours"
 
 interface FooterProps {
   content: HomepageContent["footer"]
@@ -76,17 +69,7 @@ export function Footer({ content, contact }: FooterProps) {
 
           {/* Opening Hours */}
           <div>
-            <h3 className="font-medium mb-3 sm:mb-4 text-sm sm:text-base">{content.hoursHeading}</h3>
-            <div className="space-y-1 sm:space-y-2">
-              {openingHours.map((item) => (
-                <div key={item.day} className="flex justify-between text-xs sm:text-sm">
-                  <span className="text-background/70">{item.day}</span>
-                  <span className={item.hours === "Geschlossen" ? "text-background/50" : "text-background/70"}>
-                    {item.hours}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <OpeningHours title={content.hoursHeading} tone="dark" />
           </div>
         </div>
 

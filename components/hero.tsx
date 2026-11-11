@@ -80,7 +80,7 @@ export function Hero({ content, contact }: HeroProps) {
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              <span>Di-Sa: 17:00 - 23:00 | So: 11:30 - 23:00</span>
+              <span>Di–Fr: 17:00–23:00 · Sa–So: 11:30–14:30 &amp; 17:00–23:00</span>
             </div>
           </div>
         </div>

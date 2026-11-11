@@ -2,14 +2,7 @@ import { MapPin, Phone, Mail, Clock, Car, Accessibility } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toTelHref } from "@/lib/content/phone"
 import type { HomepageContent } from "@/lib/content/get-homepage-content"
-
-// Opening hours stay hardcoded per the CMS content rules (not admin-managed).
-const openingHours = [
-  { day: "Montag", hours: "Geschlossen" },
-  { day: "Dienstag - Freitag", hours: "17:00 - 23:00" },
-  { day: "Samstag", hours: "11:30 - 14:30, 17:00 - 23:00" },
-  { day: "Sonntag", hours: "11:30 - 14:30, 17:00 - 23:00" },
-]
+import { OpeningHours } from "@/components/opening-hours"
 
 // Map embed / destination links stay hardcoded — technical configuration, not content.
 // All three target the restaurant's Google place (0x47a6573914768d2b:0x3c70f7785fc37d9a,
@@ -122,17 +115,7 @@ export function Contact({ content, contact }: ContactProps) {
                 <Clock className="h-5 sm:h-6 w-5 sm:w-6 text-accent" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-foreground mb-2 sm:mb-3 text-sm sm:text-base">{content.hoursLabel}</h3>
-                <div className="space-y-1 sm:space-y-2">
-                  {openingHours.map((item) => (
-                    <div key={item.day} className="flex justify-between text-xs sm:text-sm">
-                      <span className="text-muted-foreground">{item.day}</span>
-                      <span className={item.hours === "Geschlossen" ? "text-muted-foreground" : "text-foreground"}>
-                        {item.hours}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                <OpeningHours title={content.hoursLabel} />
               </div>
             </div>
 

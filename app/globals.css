@@ -81,6 +81,8 @@
   --font-sans: var(--font-sans), 'Inter', system-ui, sans-serif;
   --font-serif: var(--font-serif), 'Playfair Display', Georgia, serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-hand: var(--font-amatic), 'Amatic SC', cursive;
+  --font-rounded: var(--font-nunito), 'Nunito', system-ui, sans-serif;
   --color-olive: var(--olive);
   --color-olive-foreground: var(--olive-foreground);
   --color-background: var(--background);

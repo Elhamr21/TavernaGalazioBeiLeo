@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Playfair_Display, Inter, Amatic_SC, Nunito } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ConfigureAmplifyClientSide } from '@/components/admin/configure-amplify-client'
 import './globals.css'
@@ -13,6 +13,20 @@ const playfair = Playfair_Display({
 const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-sans',
+  display: 'swap',
+});
+
+// Opening hours block (contact section + footer)
+const amatic = Amatic_SC({
+  subsets: ["latin"],
+  weight: ['400', '700'],
+  variable: '--font-amatic',
+  display: 'swap',
+});
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: '--font-nunito',
   display: 'swap',
 });
 
@@ -45,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${amatic.variable} ${nunito.variable} font-sans antialiased`}>
         <ConfigureAmplifyClientSide />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
