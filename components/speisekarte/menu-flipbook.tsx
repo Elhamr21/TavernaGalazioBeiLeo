@@ -9,19 +9,23 @@ const FlipBookAny = HTMLFlipBook as any
 const PAGE_RATIO = 1190 / 1684
 // Bump whenever the page images change (e.g. new prices) so browsers and the CDN
 // don't keep serving cached copies under the same file names.
-const MENU_VERSION = "2026-11"
+const MENU_VERSION = "2026-11-11b"
 
-const MENU_PAGES = Array.from({ length: 10 }, (_, index) => {
-  const pageNumber = index.toString().padStart(2, "0")
+export type MenuPage = {
+  src: string
+  alt: string
+}
 
-  return {
-    src: `/menu/menu-page-${pageNumber}.png?v=${MENU_VERSION}`,
-    alt:
-      index === 0
-        ? "Taverna Galazio Speisekarte Cover"
-        : `Taverna Galazio Speisekarte Seite ${index}`,
-  }
-})
+function buildPages(prefix: string, count: number, label: string): MenuPage[] {
+  return Array.from({ length: count }, (_, index) => ({
+    src: `/menu/${prefix}-${index.toString().padStart(2, "0")}.png?v=${MENU_VERSION}`,
+    alt: index === 0 ? `Taverna Galazio ${label} Cover` : `Taverna Galazio ${label} Seite ${index}`,
+  }))
+}
+
+// Page images are generated from lib/menu-data.ts in the original menu design.
+export const MAIN_MENU_PAGES = buildPages("menu-page", 15, "Speisekarte")
+export const EXTRA_MENU_PAGES = buildPages("extra-karte-page", 4, "Extra-Karte")
 
 type BookDimensions = {
   width: number
@@ -92,11 +96,17 @@ function useBookDimensions(isMobile: boolean) {
   return dimensions
 }
 
-export function MenuFlipbook() {
+interface MenuFlipbookProps {
+  pages?: MenuPage[]
+  title?: string
+}
+
+export function MenuFlipbook({ pages = MAIN_MENU_PAGES, title = "Speisekarte" }: MenuFlipbookProps) {
   const bookRef = useRef<any>(null)
   const [currentPage, setCurrentPage] = useState(0)
   const isMobile = useIsMobile()
   const dimensions = useBookDimensions(isMobile)
+  const MENU_PAGES = pages
   const totalPages = MENU_PAGES.length
   const progress = ((currentPage + 1) / totalPages) * 100
   const visiblePageCount = isMobile ? 1 : 2
@@ -131,7 +141,7 @@ export function MenuFlipbook() {
       image.decoding = "async"
       image.src = page.src
     })
-  }, [currentPage])
+  }, [currentPage, MENU_PAGES])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -160,7 +170,7 @@ export function MenuFlipbook() {
     <section className="flex min-h-[calc(100svh-7rem)] w-full flex-col items-center justify-center gap-4 py-3 sm:gap-5 lg:py-4">
       <div className="text-center">
         <p className="font-serif text-2xl font-medium text-foreground sm:text-3xl lg:text-4xl">
-          Speisekarte
+          {title}
         </p>
         <div className="mx-auto mt-3 h-px w-24 bg-accent/70" />
       </div>

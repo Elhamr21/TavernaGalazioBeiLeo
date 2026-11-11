@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MenuFlipbook } from "@/components/speisekarte/menu-flipbook"
+import { MenuSwitcher } from "@/components/speisekarte/menu-switcher"
 import { Button } from "@/components/ui/button"
 import { Home, Phone } from "lucide-react"
 import { getContactInfo } from "@/lib/content/get-homepage-content"
@@ -43,19 +43,7 @@ export default async function SpeisekartePage() {
 
       <main className="relative overflow-hidden bg-background">
         <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-[1800px] flex-col px-3 py-4 sm:px-5 lg:px-8">
-          {/* Back to Homepage Button */}
-          <div className="mb-2 sm:mb-3">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-primary/15 bg-background/80 px-4 text-xs shadow-sm backdrop-blur-sm hover:bg-background sm:px-6 sm:text-sm"
-            >
-              <Link href="/">← Home</Link>
-            </Button>
-          </div>
-
-          {/* Flipbook */}
-          <MenuFlipbook />
+          <MenuSwitcher />
         </div>
       </main>
     </div>
